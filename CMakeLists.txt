@@ -7,6 +7,7 @@ find_package(glfw3 CONFIG REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(glm CONFIG REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
 # The main executable
 add_executable(opengl-cmake-skeleton
@@ -31,6 +32,7 @@ target_link_libraries(opengl-cmake-skeleton
   PRIVATE GLEW::GLEW 
   PRIVATE glm::glm 
   PRIVATE OpenGL::GL 
+  PRIVATE imgui::imgui
 )
 
 # Copy shaders to build directory

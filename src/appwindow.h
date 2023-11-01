@@ -35,6 +35,7 @@ public:
     int GetWidth() const { return width; }
     int GetHeight() const { return height; }
     float GetAspectRatio() const { return float(width) / height; }
+    GLFWwindow *GetGLFWWindow() const { return window; }
 
 private:
     GLFWwindow *window;
