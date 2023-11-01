@@ -4,7 +4,7 @@ Application::Application()
 {
     window = new AppWindow(800, 600, "OpenGL Application");
     shader = new Shader("../shaders/shader.vert", "../shaders/shader.frag");
-    mesh = Mesh::CreateTriangle();
+    object = new Object(Mesh::CreateTriangle());
     camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), // Camera position
                     glm::vec3(0.0f, 0.0f, 0.0f)  // Target position
     );
@@ -12,7 +12,7 @@ Application::Application()
 
 Application::~Application()
 {
-    delete mesh;
+    delete object;
     delete shader;
     delete window;
 }
@@ -43,11 +43,11 @@ void Application::Run()
 
         // Draw the mesh
         shader->Use();
-        shader->SetMat4("model", glm::mat4(1.0f));
+        shader->SetMat4("model", object->GetModelMatrix());
         shader->SetMat4("view", camera.GetViewMatrix());
         shader->SetMat4("projection", camera.GetProjectionMatrix(window->GetAspectRatio()));
 
-        mesh->Render();
+        object->Render();
 
         // Rendering
         // (Your code clears your framebuffer, renders your other stuff etc.)

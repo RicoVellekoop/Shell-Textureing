@@ -7,7 +7,7 @@
 
 #include "appwindow.h"
 #include "shader.h"
-#include "mesh.h"
+#include "object.h"
 #include "camera.h"
 
 class Application
@@ -20,7 +20,7 @@ public:
 private:
     AppWindow *window;
     Shader *shader;
-    Mesh *mesh;
+    Object *object;
     Camera camera;
 };
 

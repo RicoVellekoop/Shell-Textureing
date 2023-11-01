@@ -22,6 +22,8 @@ add_executable(opengl-cmake-skeleton
   src/appwindow.h
   src/camera.cpp
   src/camera.h
+  src/object.cpp
+  src/object.h
 )
 
 set_property(TARGET opengl-cmake-skeleton PROPERTY CXX_STANDARD 11)
