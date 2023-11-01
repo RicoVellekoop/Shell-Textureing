@@ -7,6 +7,8 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 
+#include "camera.h"
+
 class AppWindow
 {
 public:
@@ -14,10 +16,30 @@ public:
     ~AppWindow();
     void Update();
     bool ShouldClose() const;
-    // ... other methods as needed
+
+    void Resize(int width, int height)
+    {
+        this->width = width;
+        this->height = height;
+    }
+
+    static void FramebufferSizeCallback(GLFWwindow *window, int width, int height)
+    {
+        // Get the AppWindow instance from the GLFW window
+        AppWindow *appWindow = static_cast<AppWindow *>(glfwGetWindowUserPointer(window));
+
+        // Update the AppWindow's width and height
+        appWindow->Resize(width, height);
+    }
+
+    int GetWidth() const { return width; }
+    int GetHeight() const { return height; }
+    float GetAspectRatio() const { return float(width) / height; }
+
 private:
     GLFWwindow *window;
-    // ... other data members as needed
+    int width;
+    int height;
 };
 
 #endif

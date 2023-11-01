@@ -1,6 +1,6 @@
 #include "appwindow.h"
 
-AppWindow::AppWindow(int width, int height, const std::string &title)
+AppWindow::AppWindow(int width, int height, const std::string &title) : width(width), height(height)
 {
     // Initialize GLFW
     if (!glfwInit())
@@ -25,6 +25,12 @@ AppWindow::AppWindow(int width, int height, const std::string &title)
         glfwTerminate();
         throw std::runtime_error("Failed to initialize GLEW");
     }
+
+    // Set the framebuffer size callback
+    glfwSetFramebufferSizeCallback(window, FramebufferSizeCallback);
+
+    // Store a pointer to this AppWindow instance in the GLFW window
+    glfwSetWindowUserPointer(window, this);
 }
 
 AppWindow::~AppWindow()
