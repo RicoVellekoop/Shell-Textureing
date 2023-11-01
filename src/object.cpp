@@ -55,8 +55,17 @@ glm::mat4 Object::GetModelMatrix()
 
 void Object::Menu()
 {
-    ImGui::Text("Object");
-    ImGui::SliderFloat3("Position", &position.x, -10.0f, 10.0f);
-    ImGui::SliderFloat3("Rotation", &rotation.x, -180.0f, 180.0f);
-    ImGui::SliderFloat3("Scale", &scale.x, 0.0f, 10.0f);
+    if (ImGui::CollapsingHeader("Object"))
+    {
+        ImGui::SliderFloat3("Position", &position.x, -10.0f, 10.0f);
+        ImGui::SliderFloat3("Rotation", &rotation.x, -180.0f, 180.0f);
+        ImGui::SliderFloat3("Scale", &scale.x, 0.0f, 10.0f);
+
+        if (ImGui::Button("Reset"))
+        {
+            position = glm::vec3(0.0f);
+            rotation = glm::vec3(0.0f);
+            scale = glm::vec3(1.0f);
+        }
+    }
 }
