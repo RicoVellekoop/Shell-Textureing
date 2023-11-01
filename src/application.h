@@ -4,6 +4,7 @@
 #include "appwindow.h"
 #include "shader.h"
 #include "mesh.h"
+#include "camera.h"
 
 class Application
 {
@@ -11,12 +12,12 @@ public:
     Application();
     ~Application();
     void Run();
-    // ... other methods as needed
+
 private:
     AppWindow *window;
     Shader *shader;
     Mesh *mesh;
-    // ... other data members as needed
+    Camera camera;
 };
 
 #endif

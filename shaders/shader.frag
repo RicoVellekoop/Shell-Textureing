@@ -7,6 +7,7 @@ in vec3 Normal;
 in vec3 FragPos;
 in vec2 TexCoord;
 
+// Uniforms
 void main()
 {
     FragColor = vec4(TexCoord, 0.0, 1.0); // Red color

@@ -1,6 +1,6 @@
 #include "mesh.h"
 
-Mesh::Mesh(const std::vector<Vertex> &vertices)
+Mesh::Mesh(const std::vector<Vertex> &vertices) : vertexCount(vertices.size())
 {
     // Generate and bind the Vertex Array Object (VAO)
     glGenVertexArrays(1, &VAO);

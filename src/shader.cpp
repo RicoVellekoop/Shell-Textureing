@@ -82,3 +82,15 @@ void Shader::Use()
 {
     glUseProgram(program);
 }
+
+void Shader::SetMat4(const std::string &name, const glm::mat4 &value)
+{
+    GLint uniformLoc = glGetUniformLocation(program, name.c_str());
+    glUniformMatrix4fv(uniformLoc, 1, GL_FALSE, glm::value_ptr(value));
+}
+
+void Shader::SetVec3(const std::string &name, const glm::vec3 &value)
+{
+    GLint uniformLoc = glGetUniformLocation(program, name.c_str());
+    glUniform3fv(uniformLoc, 1, glm::value_ptr(value));
+}
