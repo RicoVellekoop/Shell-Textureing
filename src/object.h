@@ -6,6 +6,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
+#include <imgui.h>
+
 class Object
 {
 public:
@@ -21,6 +23,7 @@ public:
     ~Object();
     void Render();
     glm::mat4 GetModelMatrix();
+    void Menu();
 
 private:
     Mesh *mesh;

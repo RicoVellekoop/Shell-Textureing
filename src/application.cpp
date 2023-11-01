@@ -39,7 +39,13 @@ void Application::Run()
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
-        ImGui::ShowDemoWindow(); // Show demo window! :)
+
+        bool open = true;
+        if (ImGui::Begin("My Custom Window", &open))
+        {
+            object->Menu();
+        }
+        ImGui::End();
 
         // Draw the mesh
         shader->Use();

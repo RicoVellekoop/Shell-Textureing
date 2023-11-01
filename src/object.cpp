@@ -52,3 +52,11 @@ glm::mat4 Object::GetModelMatrix()
     model = glm::scale(model, scale);
     return model;
 }
+
+void Object::Menu()
+{
+    ImGui::Text("Object");
+    ImGui::SliderFloat3("Position", &position.x, -10.0f, 10.0f);
+    ImGui::SliderFloat3("Rotation", &rotation.x, -180.0f, 180.0f);
+    ImGui::SliderFloat3("Scale", &scale.x, 0.0f, 10.0f);
+}
