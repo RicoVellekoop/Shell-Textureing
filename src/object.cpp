@@ -74,3 +74,26 @@ void Object::Menu()
         }
     }
 }
+
+void Object::ObjectCreationMenu(std::vector<Object *> &objects)
+{
+    if (ImGui::CollapsingHeader("Object Creation"))
+    {
+        if (ImGui::Button("Create Triangle"))
+        {
+            objects.push_back(new Object(Mesh::CreateTriangle()));
+        }
+        if (ImGui::Button("Create Quad"))
+        {
+            objects.push_back(new Object(Mesh::CreateQuad()));
+        }
+        if (ImGui::Button("Create Cube"))
+        {
+            objects.push_back(new Object(Mesh::CreateCube()));
+        }
+        if (ImGui::Button("Create Sphere"))
+        {
+            objects.push_back(new Object(Mesh::CreateSphere(20, 20)));
+        }
+    }
+}

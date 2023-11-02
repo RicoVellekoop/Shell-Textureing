@@ -51,7 +51,7 @@ void Application::Run()
         bool open = true;
         if (ImGui::Begin("My Custom Window", &open))
         {
-            object->Menu();
+            Object::ObjectCreationMenu(objects);
             for (auto obj : objects)
             {
                 obj->Menu();
@@ -60,6 +60,7 @@ void Application::Run()
 
         ImGui::End();
 
+        // Draw the mesh
         shader->Use();
         shader->SetMat4("view", camera.GetViewMatrix());
         shader->SetMat4("projection", camera.GetProjectionMatrix(window->GetAspectRatio()));
@@ -70,6 +71,10 @@ void Application::Run()
             object->Render();
         }
 
+        // Rendering
+        // (Your code clears your framebuffer, renders your other stuff etc.)
+        // Update and Render additional Platform Windows
+
         ImGui::Render();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
         {
@@ -79,7 +84,7 @@ void Application::Run()
             glfwMakeContextCurrent(backup_current_context);
         }
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
+        // (Your code calls glfwSwapBuffers() etc.)
         window->Update();
     }
     ImGui_ImplOpenGL3_Shutdown();
