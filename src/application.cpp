@@ -25,6 +25,8 @@ void Application::Run()
     ImGuiIO &io = ImGui::GetIO();
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard; // Enable Keyboard Controls
     io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;  // Enable Gamepad Controls
+    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // Enable Docking
+    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // Enable Multi-Viewport / Platform Windows
 
     // Setup Platform/Renderer backends
     ImGui_ImplGlfw_InitForOpenGL(window->GetGLFWWindow(), true); // Second param install_callback=true will install GLFW callbacks and chain to existing ones.
@@ -45,6 +47,7 @@ void Application::Run()
         {
             object->Menu();
         }
+
         ImGui::End();
 
         // Draw the mesh
@@ -57,7 +60,16 @@ void Application::Run()
 
         // Rendering
         // (Your code clears your framebuffer, renders your other stuff etc.)
+        // Update and Render additional Platform Windows
+
         ImGui::Render();
+        if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+        {
+            GLFWwindow *backup_current_context = glfwGetCurrentContext();
+            ImGui::UpdatePlatformWindows();
+            ImGui::RenderPlatformWindowsDefault();
+            glfwMakeContextCurrent(backup_current_context);
+        }
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
         // (Your code calls glfwSwapBuffers() etc.)
         window->Update();
