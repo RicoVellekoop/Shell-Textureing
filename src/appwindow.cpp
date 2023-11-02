@@ -31,6 +31,10 @@ AppWindow::AppWindow(int width, int height, const std::string &title) : width(wi
 
     // Store a pointer to this AppWindow instance in the GLFW window
     glfwSetWindowUserPointer(window, this);
+
+    // Enable the depth buffer
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
 }
 
 AppWindow::~AppWindow()
