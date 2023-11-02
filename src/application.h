@@ -5,6 +5,8 @@
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
 
+#include <vector>
+
 #include "appwindow.h"
 #include "shader.h"
 #include "object.h"
@@ -20,7 +22,7 @@ public:
 private:
     AppWindow *window;
     Shader *shader;
-    Object *object;
+    std::vector<Object *> objects;
     Camera camera;
 };
 

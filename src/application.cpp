@@ -4,7 +4,7 @@ Application::Application()
 {
     window = new AppWindow(800, 600, "OpenGL Application");
     shader = new Shader("../shaders/shader.vert", "../shaders/shader.frag");
-    object = new Object(Mesh::CreateTriangle());
+    objects = std::vector<Object *>();
     camera = Camera(glm::vec3(3.0f, 3.0f, 3.0f), // Camera position
                     glm::vec3(0.0f, 0.0f, 0.0f)  // Target position
     );
@@ -12,7 +12,12 @@ Application::Application()
 
 Application::~Application()
 {
-    delete object;
+    for (auto obj : objects)
+    {
+        delete obj;
+    }
+    objects.clear();
+
     delete shader;
     delete window;
 }
@@ -47,21 +52,23 @@ void Application::Run()
         if (ImGui::Begin("My Custom Window", &open))
         {
             object->Menu();
+            for (auto obj : objects)
+            {
+                obj->Menu();
+            }
         }
 
         ImGui::End();
 
-        // Draw the mesh
         shader->Use();
-        shader->SetMat4("model", object->GetModelMatrix());
         shader->SetMat4("view", camera.GetViewMatrix());
         shader->SetMat4("projection", camera.GetProjectionMatrix(window->GetAspectRatio()));
 
-        object->Render();
-
-        // Rendering
-        // (Your code clears your framebuffer, renders your other stuff etc.)
-        // Update and Render additional Platform Windows
+        for (auto object : objects)
+        {
+            shader->SetMat4("model", object->GetModelMatrix());
+            object->Render();
+        }
 
         ImGui::Render();
         if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
@@ -72,7 +79,7 @@ void Application::Run()
             glfwMakeContextCurrent(backup_current_context);
         }
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-        // (Your code calls glfwSwapBuffers() etc.)
+
         window->Update();
     }
     ImGui_ImplOpenGL3_Shutdown();

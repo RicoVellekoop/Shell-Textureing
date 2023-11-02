@@ -7,6 +7,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 
 #include <imgui.h>
+#include <string>
 
 class Object
 {
@@ -21,12 +22,23 @@ public:
     Object(Mesh *mesh);
 
     ~Object();
+
+    int GetId() { return id; }
+
     void Render();
     glm::mat4 GetModelMatrix();
     void Menu();
+    static void ObjectCreationMenu(std::vector<Object *> &objects);
 
 private:
     Mesh *mesh;
+    int id;
+
+    static int GetNextId()
+    {
+        static int nextId = 0;
+        return nextId++;
+    }
 };
 
 #endif
