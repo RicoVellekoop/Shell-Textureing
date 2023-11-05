@@ -51,6 +51,7 @@ void Application::Run()
         bool open = true;
         if (ImGui::Begin("My Custom Window", &open))
         {
+            camera.Menu();
             Object::ObjectCreationMenu(objects);
             for (auto obj : objects)
             {
