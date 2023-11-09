@@ -1,29 +1,32 @@
 #include "object.h"
 
-Object::Object(Mesh *mesh, glm::vec3 position, glm::vec3 rotation, glm::vec3 scale)
-{
-    this->id = GetNextId();
-    this->mesh = mesh;
-    this->position = position;
-    this->rotation = rotation;
-    this->scale = scale;
-}
-
-Object::Object(Mesh *mesh, glm::vec3 position, glm::vec3 rotation)
+Object::Object(Mesh *mesh, Texture *texture, glm::vec3 position, glm::vec3 rotation)
 {
     this->id = GetNextId();
 
     this->mesh = mesh;
+    this->texture = texture;
     this->position = position;
     this->rotation = rotation;
     this->scale = glm::vec3(1.0f);
 }
 
-Object::Object(Mesh *mesh, glm::vec3 position)
+Object::Object(Mesh *mesh, Texture *texture, glm::vec3 position)
 {
     this->id = GetNextId();
     this->mesh = mesh;
+    this->texture = texture;
     this->position = position;
+    this->rotation = glm::vec3(0.0f);
+    this->scale = glm::vec3(1.0f);
+}
+
+Object::Object(Mesh *mesh, Texture *texture)
+{
+    this->id = GetNextId();
+    this->mesh = mesh;
+    this->texture = texture;
+    this->position = glm::vec3(0.0f);
     this->rotation = glm::vec3(0.0f);
     this->scale = glm::vec3(1.0f);
 }
@@ -32,6 +35,7 @@ Object::Object(Mesh *mesh)
 {
     this->id = GetNextId();
     this->mesh = mesh;
+    this->texture = getDefaultTexture();
     this->position = glm::vec3(0.0f);
     this->rotation = glm::vec3(0.0f);
     this->scale = glm::vec3(1.0f);
@@ -40,10 +44,12 @@ Object::Object(Mesh *mesh)
 Object::~Object()
 {
     delete mesh;
+    delete texture;
 }
 
 void Object::Render()
 {
+
     mesh->Render();
 }
 

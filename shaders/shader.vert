@@ -14,8 +14,8 @@ out vec2 TexCoord;
 
 void main()
 {
-    vec4 pos = (projection * view * model) * vec4(position, 1.0);
-    gl_Position = vec4(pos.xyz / pos.w, 1.0);
+    
+    gl_Position = projection * view * model * vec4(position, 1.0);
     Normal = normal;
     FragPos = position;
     TexCoord = texCoord;

@@ -24,6 +24,8 @@ add_executable(opengl-cmake-skeleton
   src/camera.h
   src/object.cpp
   src/object.h
+  src/texture.cpp
+  src/texture.h
 )
 
 set_property(TARGET opengl-cmake-skeleton PROPERTY CXX_STANDARD 11)
@@ -40,7 +42,11 @@ target_link_libraries(opengl-cmake-skeleton
 # Copy shaders to build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/shaders DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
 
+# Copy assets to build directory
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/assets DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
 target_include_directories(opengl-cmake-skeleton
   PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src
   PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/src
+  PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/lib
 )
